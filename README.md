@@ -3,8 +3,6 @@ netphony PCE v1.3.3
 
 Repository branch build status:
 
-| **Master**  | **Develop**   |
-|:---:|:---:|
 | [![Build Status](https://travis-ci.org/telefonicaid/netphony-pce.svg?branch=master)](https://travis-ci.org/telefonicaid/netphony-pce) | [![Build Status](https://travis-ci.org/telefonicaid/netphony-pce.svg?branch=develop)](https://travis-ci.org/telefonicaid/netphony-pce) |
 
 Latest Maven Central Release: 
