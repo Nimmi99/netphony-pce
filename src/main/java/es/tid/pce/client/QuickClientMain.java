@@ -74,7 +74,7 @@ public class QuickClientMain {
 		
 		try {
 			CommandLine line = parser.parse( options, args );
-			
+
 			//FileHandler fh;
 			//FileHandler fh2;
 			try {
@@ -93,29 +93,50 @@ public class QuickClientMain {
 				System.exit(1);
 			}
 
-			
+
 			String ip = args[0];
 			int port = Integer.valueOf(args[1]).intValue();
-			
+
 			QuickClientObj qcObj = new QuickClientObj(Log, ip,  port);
 			if(line.hasOption("li")){
 				qcObj.setLocalAddress(line.getOptionValue("li"));
 			}
-			
-			qcObj.start();		
-	
+
+			qcObj.start();
+
+			/*for multiple requests*/
+			int i;
+			for (i=2; i<args.length;i+=2 ){
+				System.out.println("loop runs" + i +"times");
+
+				System.out.println("Creando el mensaje");
+				Request req = qcObj.createReqMessage(args[i], args[i+1], line);
+				System.out.println("Peticion "+req.toString());
+				PCEPRequest p_r = new PCEPRequest();
+				p_r.addRequest(req);
+
+				LinkedList<PCEPMessage> messageList=new LinkedList<PCEPMessage>();
+				System.out.println("Enviando mensaje");
+				PCEPResponse res = qcObj.sendReqMessage(p_r, messageList);
+				System.out.println("Enviado!!!");
+				System.out.println("Respuesta "+res.toString());
+
+
+			}
+
+			/*
 			System.out.println("Creando el mensaje");
 			Request req = qcObj.createReqMessage(args[2], args[3], line);
 			System.out.println("Peticion "+req.toString());
 			PCEPRequest p_r = new PCEPRequest();
 			p_r.addRequest(req);
-			
+
 			LinkedList<PCEPMessage> messageList=new LinkedList<PCEPMessage>();
 			System.out.println("Enviando mensaje");
 			PCEPResponse res = qcObj.sendReqMessage(p_r, messageList);
 			System.out.println("Enviado!!!");
 			System.out.println("Respuesta "+res.toString());
-			
+			*/
 		}
 		catch( ParseException exp ) {
 			System.err.println( "Parsing failed.  Reason: " + exp.getMessage() );
